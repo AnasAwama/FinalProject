@@ -1,0 +1,117 @@
+body{
+    background-image: url("image/137180.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.Cent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+
+}
+
+.text-margin{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.Border{
+    background-color: rgb(179 241 255 / 15%);
+    border: solid rgba(0, 0, 0, 0.10);
+    box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 10%); 
+    border-radius: 40px;
+    height: 350px;
+    width: 700px
+}
+.text{
+    text-align: center;
+    padding-top: 40px;
+    padding-left: 90px
+}
+.smallBorder{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(179 241 255 / 15%);
+    border: solid rgba(0, 0, 0, 0.10);
+    box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 10%); 
+    border-radius: 40px;
+    height: 130px;
+    width: 130px;
+    margin-left: 20px;
+    float: left;
+}
+.smallText{
+    text-align: center;
+}
+img{
+    
+    width: 60px; 
+    height: 60px;
+}
+
+.alignBox{
+    
+    margin-left: 450px;
+    margin-top: -64px;
+}
+.formCent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 130px;
+}
+
+input{
+    width:500px;
+    height:30px;
+    background-color: rgb(255, 255, 255);
+    border: solid rgba(0, 0, 0, 0.119);;
+    border-radius: 15px;
+    border-width: 2px;
+}
+::placeholder{
+    color:rgba(0, 0, 0, 0.608);
+    padding-left: 3px;
+}
+
+.imageSize{
+    width: 250px;
+    height: 250px;
+    padding-top: 40px;
+    padding-left: 80px;
+}
+
+@media (max-width: 1500px) {
+    .Cent {
+        padding-top: 20px; 
+    }
+
+    .text {
+        padding-left: 20px; 
+    }
+
+    .smallBorder {
+        margin-left: 10px; 
+        margin-bottom: 10px; 
+        
+    }
+
+    .alignBox {
+        margin-left: 0px;
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        
+    }
+
+    .formCent {
+        display: flex;
+        padding-top: 80px; 
+    }
+
+    
+}
