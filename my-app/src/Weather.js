@@ -1,5 +1,7 @@
 import React,{useEffect,useState} from "react"
 import './weather.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const formatDay = (dateString) => {
     const options = { weekday: 'long' };
@@ -44,6 +46,29 @@ class Weather extends React.Component{
         return(
             
             <body>
+            <form action="http://localhost:8000/" method="get">
+            <nav class="navbar navbar-expand-lg NavBgColor">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Weather App</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                        {/* add item */}
+                        </li>
+                    </ul>
+                    <form action="" method="get" class="d-flex" role="search">
+                        {/* add LogIn */}
+                        <button type="button" href="./LogIn.js" class="btn btn-outline-dark Lright">Log-In</button>
+                    </form>
+                    <form class="d-flex" role="search">
+                        <button type="button" class="btn btn-outline-light Sright">Sign-Up</button>
+                    </form>
+                    </div>
+                </div>
+                </nav>
             <div className="formCent">
                 <form>
                     <input type="text" placeholder="Enter City" onChange={this.handleSearchChange} value={this.state.search}/>
@@ -89,6 +114,7 @@ class Weather extends React.Component{
                 )
             ))}
             </div>
+            </form>
             </body>
         )
     }
