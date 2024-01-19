@@ -16,6 +16,11 @@ body{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.NavBgColor{
+    background-color: rgb(179 241 255 / 10%);
+    border: solid rgba(0, 0, 0, 0.03);
+    box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 8%);
+}
 
 .Border{
     background-color: rgb(179 241 255 / 15%);
@@ -52,6 +57,13 @@ img{
     width: 60px; 
     height: 60px;
 }
+.Sright{
+margin-right: 25px;
+}
+
+.Lright{
+    margin-right: 10px;
+    }
 
 .alignBox{
     
@@ -62,7 +74,7 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 130px;
+    padding-top: 105px;
 }
 
 input{
