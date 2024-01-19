@@ -42,6 +42,7 @@ class Weather extends React.Component{
     render(){
 
         return(
+            
             <body>
             <div className="formCent">
                 <form>
