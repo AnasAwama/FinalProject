@@ -1,4 +1,4 @@
-body{
+.image{
     background-image: url("image/137180.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,9 +17,9 @@ body{
     margin-bottom: 10px;
 }
 .NavBgColor{
-    background-color: rgb(179 241 255 / 10%);
-    border: solid rgba(0, 0, 0, 0.03);
-    box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 8%);
+    background-color: rgb(179 241 255 / 10%) !important ;
+    border: solid rgba(0, 0, 0, 0.03) !important;
+    box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 8%) !important;
 }
 
 .Border{
