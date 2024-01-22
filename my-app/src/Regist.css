@@ -1,0 +1,103 @@
+.BorderReg {
+    background-color: rgb(179 241 255 / 15%);
+    border: solid rgba(0, 0, 0, 0.10);
+    box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 10%);
+    border-radius: 40px;
+    height: 390px; 
+    width: 600px;
+    margin-left:500px;
+    margin-top: 60px;
+}
+
+.imageReg{
+    background-image: url("image/137180.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.Regh1 {
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    font-size: 36px;
+}
+
+.formInputGroup {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+    
+}
+.formInput {
+    display: inline-block;
+    margin: 0 50px 0px;
+    width: 260px;
+}
+
+.formInput:focus {
+    outline: none;
+}
+
+.formInput::placeholder {
+    text-align: center;
+}
+
+.formbutReg{
+    width:90px;
+    display: inline;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 13px;
+    margin-left: 230px;
+}
+
+.formbutReg:hover {
+    background-color: rgb(226, 226, 226);
+}
+.formRadioGroup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.formRadioGroup{
+    margin-left: 130px; 
+}
+
+label{
+    margin-left: 62px;
+}
+
+.formInputDate {
+    display: inline-block;
+    margin: 0 14px 0px;
+    width: 352px;
+}
+
+.formInputDate:focus {
+    outline: none;
+}
+
+.formInputDate::placeholder {
+    text-align: center;
+}
+
+@media (max-width: 1500px) {
+    .BorderLog {
+        width: 590px;
+        margin-left: 100px;
+        margin-top: 100px; 
+        }
+
+    .Regh1 {
+        font-size: 24px;
+    }
+
+
+    .formbutReg {
+        margin-left: 240px;
+    }
+}
