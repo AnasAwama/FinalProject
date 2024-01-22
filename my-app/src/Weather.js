@@ -1,4 +1,6 @@
 import React,{useEffect,useState} from "react"
+import { BrowserRouter as Router, Routes, Route ,Link} from 'react-router-dom';
+
 import './weather.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -15,9 +17,11 @@ class Weather extends React.Component{
         this.state = {
             key: '56102d169a542b0bd2015403e7e860d6',
             dataApi: {},
-            search: ""
+            search: "",
+            
         };
         }
+    
     componentDidMount() {
         this.fetchWeather();
     }
@@ -41,15 +45,16 @@ class Weather extends React.Component{
         this.fetchWeather();
     }
     
+    
     render(){
 
         return(
             
-            <body>
-            <form action="http://localhost:8000/" method="get">
-            <nav class="navbar navbar-expand-lg NavBgColor">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Weather App</a>
+            <body className="image">
+            {/* <form action="http://localhost:9000/Weather" method="get"> */}
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container-fluid ">
+                <Link to="/Weather" class="navbar-brand " >Weather App</Link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -59,16 +64,12 @@ class Weather extends React.Component{
                         {/* add item */}
                         </li>
                     </ul>
-                    <form action="" method="get" class="d-flex" role="search">
-                        {/* add LogIn */}
-                        <button type="button" href="./LogIn.js" class="btn btn-outline-dark Lright">Log-In</button>
-                    </form>
-                    <form class="d-flex" role="search">
-                        <button type="button" class="btn btn-outline-light Sright">Sign-Up</button>
-                    </form>
+                    
+                    <Link to="/LogIn" type="button" class="btn btn-outline-dark Lright">Log-In</Link>
+                    <Link to="/Regist" type="button" class="btn btn-outline-light Sright">Sign-Up</Link>
                     </div>
                 </div>
-                </nav>
+</nav>
             <div className="formCent">
                 <form>
                     <input type="text" placeholder="Enter City" onChange={this.handleSearchChange} value={this.state.search}/>
@@ -114,7 +115,7 @@ class Weather extends React.Component{
                 )
             ))}
             </div>
-            </form>
+            {/* </form> */}
             </body>
         )
     }
