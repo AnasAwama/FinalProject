@@ -1,0 +1,74 @@
+.BorderLog{
+    background-color: rgb(179 241 255 / 15%);
+    border: solid rgba(0, 0, 0, 0.10);
+    box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 10%); 
+    border-radius: 40px;
+    height: 300px;
+    width: 540px;
+    margin-left:500px;
+    margin-top: 150px;
+    
+}
+.imageLog{
+    background-image: url("image/137180.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.Logh1{
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 20px
+}
+
+.formMid{
+    display: inline;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 13px;
+    margin-left: 15px;
+}
+
+.formMid:focus{
+    outline: none;
+}
+.formMid::placeholder{
+text-align: center;
+}
+
+.formbut{
+    width:75px;
+    display: inline;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 13px;
+    margin-left: 230px;
+}
+.formbut:hover{
+    background-color:rgb(226, 226, 226)
+}
+
+@media (max-width: 1500px) {
+    .BorderLog {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .Logh1 {
+        font-size: 24px; 
+    }
+
+    .formMid {
+
+        margin-left: 50px;
+    }
+
+    .formbut {
+
+        margin-left: 265px;
+    }
+
+}
