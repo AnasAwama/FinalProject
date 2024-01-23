@@ -25,10 +25,10 @@ class Weather extends React.Component{
     componentDidMount() {
         this.fetchWeather();
     }
-//https://api.openweathermap.org/data/2.5/weather?q=${this.state.search}&cnt=5&appid=${this.state.key}
+//https://api.openweathermap.org/data/2.5/weather?q=${this.state.search}&cnt=6&appid=${this.state.key}
     fetchWeather = async () => {
         try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.state.search}&cnt=5&appid=${this.state.key}`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.state.search}&cnt=7&appid=${this.state.key}`);
         const data = await response.json();
         console.log(data);
         if (response.ok) {
@@ -100,7 +100,7 @@ class Weather extends React.Component{
             </div>
             <div className="alignBox">
             {this.state.dataApi.list && this.state.dataApi.list.map((day, index) => (
-                index > 0 && index < 5 && (
+                index > 0 && index < 6 && (
                     <div key={index}>
                         <div className={"smallBorder smallText"}>
                             <p style={{ fontWeight: 'bold', marginTop: '10px', marginBottom: '7px' }}>{formatDay(day.dt_txt)}</p>
