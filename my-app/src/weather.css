@@ -9,7 +9,6 @@
     justify-content: center;
     align-items: center;
     padding-top: 30px;
-
 }
 
 .text-margin{
@@ -28,7 +27,7 @@
     box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 10%); 
     border-radius: 40px;
     height: 350px;
-    width: 700px
+    width: 755px
 }
 .text{
     text-align: center;
@@ -46,7 +45,7 @@
     border-radius: 40px;
     height: 130px;
     width: 130px;
-    margin-left: 20px;
+    margin-left: 5px;
     float: left;
 }
 .smallText{
@@ -67,7 +66,7 @@ margin-right: 25px;
 
 .alignBox{
     
-    margin-left: 450px;
+    margin-left: 430px;
     margin-top: -64px;
 }
 .formCent{
@@ -107,7 +106,7 @@ input{
     }
 
     .smallBorder {
-        margin-left: 10px; 
+        margin-left: 5px; 
         margin-bottom: 10px; 
         
     }
