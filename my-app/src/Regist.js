@@ -16,43 +16,62 @@ class Regist extends React.Component{
         this.handleSubmit=this.handleSubmit.bind(this);
     }
 
+    // MyComponent = () => {
+    //     const navigate = useNavigate();}
+
     handleAgeChange = (e) => {
         this.setState({ age: parseInt(e.target.value) });
     }
 
-    handleSubmit(e){
+    handleSubmit = async (e) => {
         e.preventDefault();
-        const {name,email,password,age,gender} = this.state;
-        console.log("Form Values: ",name,email,password,gender,age);
-        fetch("http://localhost:9000/regist", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                password,
-                age,
-                gender,
-            }),
-            
-        })
-        .then((res) => {
-            console.log("Res result: " ,res)
+        const { name, email, password, age, gender } = this.state;
+        //const navigate = useNavigate();
+        console.log("Form Values: ", name, email, password, gender, age);
+        try {
+            const res = await fetch("http://localhost:9000/regist", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password,
+                    age: age,
+                    gender: gender,
+                }),
+            });
+            const data = await res.json();
             if (!res.ok) {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
-            return res.json();
-        })
-        .then((data) => {
-            console.log(data, "userRegister");
-        })
-        .catch((error) => {
+
+            if (data.user) {
+                this.setState({
+                    name: data.user.name,
+                    email: data.user.email,
+                    password: data.user.password,
+                    age: data.user.age,
+                    gender: data.user.gender,
+                }, () => {
+                    console.log("Updated state:", this.state);
+                    if (window.history && window.history.pushState) {
+                        window.history.pushState(null, '', '/');
+                    } else {
+                        window.location.href = '/';
+                    }
+                });
+    
+                console.log("User registered successfully");
+            } else {
+                console.error('User data not found in the response');
+            }
+        } catch (error) {
             console.error('Error:', error);
-        });
-                }
+        }
+    };
     render(){
 
         return(
@@ -101,6 +120,7 @@ class Regist extends React.Component{
                             <input type="radio" name="gender" onChange={e=>this.setState({gender:e.target.value})} value="other" required/> Other
                         </div><br/>
                         <input className="formbutReg" type="submit" value="Sign Up"/>
+                        <div className="FontSize">Already have an account? <Link className="FontColor" to="/Login">LogIn Here</Link></div>
                     </form>
                 </div>
             </body>
