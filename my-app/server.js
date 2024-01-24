@@ -25,19 +25,24 @@ client.connect().then(() => {
 const db = client.db('test');
 const coll = db.collection('users');
 
-app.post('logIn',bodyParser.json(),async(req,res)=>{
+app.post('/logIn',bodyParser.json(),async(req,res)=>{
     try {
+      console.log('Received data:', req.body);
         const { email, password } = req.body;
+        console.log('email:', email);
+        console.log('pass:',password);
         const user = await coll.findOne({ email });
-
+        console.log("User: ",user)
         if (!user) {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(401).json({ error: 'Invalid email or password' });
-        }
-        res.redirect(301, '/Weather');
+        
+        if (!user || !password) {
+          return res.status(401).json({ error: 'Invalid email or password' });
+      }
+        // res.redirect(301, '/Weather');
+        await coll.updateOne({ email }, { $set: { flag: 1 } });
+        res.status(200).json({ user });
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).json({ error: 'Internal server error', details: error.message });
@@ -49,9 +54,9 @@ app.post('/regist', bodyParser.json(), async (req, res) => {
   try {
     console.log('Received data:', req.body);
     const { name, email, password, confirmPassword, age, gender } = req.body;
-    if (password !== confirmPassword) {
-      return res.status(400).json({ error: 'Passwords do not match' });
-    }
+    console.log('Name:', name);
+    console.log('email:', email);
+    console.log('gender:', gender);
 
     const existingUser = await coll.findOne({ name, email });
 
@@ -66,7 +71,7 @@ app.post('/regist', bodyParser.json(), async (req, res) => {
         'password':password,
         'age':age,
         'gender':gender,
-        flag: 0,
+        flag: 1,
     };
 
     const result = await coll.insertOne(user);
