@@ -25,7 +25,27 @@ client.connect().then(() => {
 const db = client.db('test');
 const coll = db.collection('users');
 
-app.post('/regist', urlEncoded, async (req, res) => {
+app.post('logIn',bodyParser.json(),async(req,res)=>{
+    try {
+        const { email, password } = req.body;
+        const user = await coll.findOne({ email });
+
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+        res.redirect(301, '/Weather');
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).json({ error: 'Internal server error', details: error.message });
+    }
+})
+
+
+app.post('/regist', bodyParser.json(), async (req, res) => {
   try {
     console.log('Received data:', req.body);
     const { name, email, password, confirmPassword, age, gender } = req.body;
@@ -41,11 +61,11 @@ app.post('/regist', urlEncoded, async (req, res) => {
     }
 
     const user = {
-        name,
-        email,
-        password,
-        age,
-        gender,
+        'name':name,
+        'email':email,
+        'password':password,
+        'age':age,
+        'gender':gender,
         flag: 0,
     };
 
@@ -53,8 +73,10 @@ app.post('/regist', urlEncoded, async (req, res) => {
 
     console.log(user);
     console.log('User registered successfully');
-    res.status(201).json({ message: 'User registered successfully', userId: result.insertedId });
-  } catch (error) {
+    
+    res.status(201).json({ user: user, message: 'User registered successfully', userId: result.insertedId });
+    
+    } catch (error) {
     console.error('Error registering user:', error);
     res.status(500).json({ error: 'Internal server error', details: error.message });
   }
