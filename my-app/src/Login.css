@@ -50,6 +50,25 @@ text-align: center;
     background-color:rgb(226, 226, 226)
 }
 
+.FontSize{
+    margin-left: 100px;
+    font-size: 12px;
+}
+.FontColor{
+color:blue;
+}
+
+.FontColor:visited{
+    color:hotpink;
+}
+
+.FontColor:hover{
+    color:rgb(105, 155, 255);
+}
+.FontColor:active{
+    color:blue;
+}
+
 @media (max-width: 1500px) {
     .BorderLog {
         width: 80%;
