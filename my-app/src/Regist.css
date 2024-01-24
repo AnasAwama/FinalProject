@@ -3,7 +3,7 @@
     border: solid rgba(0, 0, 0, 0.10);
     box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 10%);
     border-radius: 40px;
-    height: 390px; 
+    height: 430px; 
     width: 600px;
     margin-left:500px;
     margin-top: 60px;
@@ -85,6 +85,24 @@ label{
     text-align: center;
 }
 
+.FontSize{
+    margin-left: 190px;
+    font-size: 12px;
+}
+.FontColor{
+color:blue;
+}
+
+.FontColor:visited{
+    color:hotpink;
+}
+
+.FontColor:hover{
+    color:rgb(105, 155, 255);
+}
+.FontColor:active{
+    color:blue;
+}
 @media (max-width: 1500px) {
     .BorderReg {
         width: 590px;
