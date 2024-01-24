@@ -30,21 +30,29 @@ class LogIn extends React.Component{
             });
             const data = await res.json();
             if (!res.ok) {
+                if (res.status==401){
+                    alert("User not found, Please sign up if you don't have account.");
+                }
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
 
-            if (data.user) {
-                this.setState({
-                    email: data.user.email,
-                    password: data.user.password,
-                }, () => {
-                    console.log("Updated state:", this.state);
-                    if (window.history && window.history.pushState) {
-                        window.history.pushState(null, '', '/');
-                    } else {
-                        window.location.href = '/';
+            if (data.error) {
+                alert(data.error);
+            } else if (data.user) {
+                this.setState(
+                    {
+                        email: data.user.email,
+                        password: data.user.password,
+                    },
+                    () => {
+                        console.log("Updated state:", this.state);
+                        if (window.history && window.history.pushState) {
+                            window.history.pushState(null, '', '/');
+                        } else {
+                            window.location.href = '/';
+                        }
                     }
-                });
+                );
     
                 console.log("User LogedIn successfully");
             } else {
@@ -52,6 +60,7 @@ class LogIn extends React.Component{
             }
         } catch (error) {
             console.error('Error:', error);
+            
         }
     };
 
