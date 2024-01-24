@@ -25,9 +25,13 @@ class Regist extends React.Component{
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, email, password, age, gender } = this.state;
+        const { name, email, password, age, gender, confirmPassword} = this.state;
         //const navigate = useNavigate();
-        console.log("Form Values: ", name, email, password, gender, age);
+        console.log("Form Values: ", name, email, password, gender, age,confirmPassword);
+        // if (password !== confirmPassword) {
+        //     alert('Passwords do not match');
+        //     return;
+        // }
         try {
             const res = await fetch("http://localhost:9000/regist", {
                 method: "post",
@@ -43,11 +47,14 @@ class Regist extends React.Component{
                     gender: gender,
                 }),
             });
+            if (res.status===400){
+                alert('User with this email is already registered')
+            }
             const data = await res.json();
             if (!res.ok) {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
-
+            
             if (data.user) {
                 this.setState({
                     name: data.user.name,
@@ -67,6 +74,7 @@ class Regist extends React.Component{
                 console.log("User registered successfully");
             } else {
                 console.error('User data not found in the response');
+                
             }
         } catch (error) {
             console.error('Error:', error);
