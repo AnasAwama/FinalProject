@@ -64,11 +64,7 @@ class Regist extends React.Component{
                     gender: data.user.gender,
                 }, () => {
                     console.log("Updated state:", this.state);
-                    if (window.history && window.history.pushState) {
-                        window.history.pushState(null, '', '/');
-                    } else {
-                        window.location.href = '/';
-                    }
+                    window.location.href = '/';
                 });
     
                 console.log("User registered successfully");
@@ -127,7 +123,8 @@ class Regist extends React.Component{
                             <input type="radio" name="gender" onChange={e=>this.setState({gender:e.target.value})} value="female" required/> Female
                             <input type="radio" name="gender" onChange={e=>this.setState({gender:e.target.value})} value="other" required/> Other
                         </div><br/>
-                        <input className="formbutReg" type="submit" value="Sign Up"/>
+                        {/* <Link to="/" className="btn btn-light formbutReg">Submit</Link> */}
+                        <input className="btn btn-light formbutReg" type="submit" value="Sign Up"/>
                         <div className="FontSize">Already have an account? <Link className="FontColor" to="/Login">LogIn Here</Link></div>
                     </form>
                 </div>
