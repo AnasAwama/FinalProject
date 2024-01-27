@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter as Router, Routes, Route ,Link} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route ,Link , useHistory} from 'react-router-dom';
 import './Login.css';
 class LogIn extends React.Component{
     constructor(props){
@@ -12,6 +12,7 @@ class LogIn extends React.Component{
     }
 
     handleSubmit = async (e) => {
+        
         e.preventDefault();
         const { email, password} = this.state;
         //const navigate = useNavigate();
@@ -46,11 +47,7 @@ class LogIn extends React.Component{
                     },
                     () => {
                         console.log("Updated state:", this.state);
-                        if (window.history && window.history.pushState) {
-                            window.history.pushState(null, '', '/');
-                        } else {
-                            window.location.href = '/';
-                        }
+                        window.location.href = '/';
                     }
                 );
     
@@ -89,7 +86,7 @@ class LogIn extends React.Component{
                         <h1 className="Logh1">Log In Page</h1>
                         <input className="formMid" type="Text" name="email" onChange={e=>this.setState({email:e.target.value})} placeholder="Enter Your Email"/><br/>
                         <input className="formMid" type="Password" name="password" onChange={e=>this.setState({password:e.target.value})} placeholder="Enter Your Password"/><br/>
-                        <input className="formbut" type="Submit" name="submit"/>
+                        <input className="btn btn-light formbut" type="Submit" name="submit"/>
                         <div className="FontSize">If you do not have an account <Link className="FontColor" to="/Regist">Sing-Up Here</Link></div>
                     </form>
                 </div>
