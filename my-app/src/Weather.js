@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react"
 import { BrowserRouter as Router, Routes, Route ,Link} from 'react-router-dom';
-
+import './nav.css';
 import './weather.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -18,13 +18,45 @@ class Weather extends React.Component{
             key: '56102d169a542b0bd2015403e7e860d6',
             dataApi: {},
             search: "",
+            username:"",
+            newSearchValue:"",
             
         };
-        }
+        this.handleLogout = this.handleLogout.bind(this);
+    }
     
+        menuToggle() {
+            const toggleMenu = document.querySelector(".menu");
+            toggleMenu.classList.toggle("active");
+        }
+
     componentDidMount() {
+        this.getUserName();
         this.fetchWeather();
     }
+    
+    getUserName=async()=>{
+        try{
+            const userName= await fetch("http://localhost:9000/user",{
+                method:'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            });
+            console.log("Username response status:", userName.status);
+            const data = await userName.json();
+            console.log("Username: ",data)
+            if(userName.ok){
+                this.setState({username : data.username})
+            }
+        }catch (error){
+            console.log(error)
+        }
+
+    }
+
+    
 //https://api.openweathermap.org/data/2.5/weather?q=${this.state.search}&cnt=6&appid=${this.state.key}
     fetchWeather = async () => {
         try {
@@ -40,21 +72,66 @@ class Weather extends React.Component{
     }
     handleSearchChange = async (e) => {
         const newSearchValue = e.target.value;
-        await this.setState({ search: newSearchValue });
+        console.log("Searchsad result: ",newSearchValue)
+        await this.setState({
+            search: newSearchValue,
+            newSearchValue: newSearchValue,
+        });
         this.componentDidMount();
         this.fetchWeather();
     }
+    handleHistory=async(e)=>{
+        try{
+            const hist = await fetch("http://localhost:9000/History", {
+            method: 'POST',
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+            body: JSON.stringify({history: this.state.newSearchValue}),
+        });
     
+        if (hist.ok) {
+            console.log("data Stored successfully");
+            
+        } else {
+            console.error("No Data Stored");
+        }
+        } catch (error) {
+        console.error("Error during Storing:", error);
+        }
+    }
+
+    handleLogout = async () => {
+        try {
+            console.log("Logout button pressed");
+            const response = await fetch("http://localhost:9000/logOut", {
+            method: 'POST',
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+            body: JSON.stringify({name: this.state.username}),
+        });
+    
+        if (response.ok) {
+            console.log("Logout successful");
+            window.location.href = '/';
+        } else {
+            console.error("Logout failed");
+        }
+        } catch (error) {
+        console.error("Error during logout:", error);
+        }
+    }
     
     render(){
-
         return(
             
             <body className="image">
-            {/* <form action="http://localhost:9000/Weather" method="get"> */}
             <nav class="navbar navbar-expand-lg ">
                 <div class="container-fluid ">
-                <Link to="/Weather" class="navbar-brand " >Weather App</Link>
+                <Link to="/" class="navbar-brand " >Weather App</Link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -64,12 +141,32 @@ class Weather extends React.Component{
                         {/* add item */}
                         </li>
                     </ul>
-                    
+                    {this.state.username ? (
+                    <div className="action">
+                        <div className="profile" onClick={()=>this.menuToggle()}>
+                            <p class="Text navbar-text">Welcome, {this.state.username}</p>
+                        </div>
+                        <div className="menu">
+                        <ul>
+                            <li>
+                                <img className="img2" src={require("./image/edit-profile.png")}/><Link to="/">Edit Profile</Link>
+                            </li>
+                            <li>
+                            <img className="img2" src={require("./image/logout.png")} /><input type="button" className="logoutButton" value="Logout" onClick={this.handleLogout}/>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+            ) : (
+                <>
                     <Link to="/LogIn" type="button" class="btn btn-outline-dark Lright">Log-In</Link>
                     <Link to="/Regist" type="button" class="btn btn-outline-light Sright">Sign-Up</Link>
+                </>
+            )}
                     </div>
                 </div>
-</nav>
+            </nav>
+            {/* </form> */}
             <div className="formCent">
                 <form>
                     <input type="text" placeholder="Enter City" onChange={this.handleSearchChange} value={this.state.search}/>
