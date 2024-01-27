@@ -37,10 +37,9 @@ app.post('/logIn',bodyParser.json(),async(req,res)=>{
             return res.status(401).json({ error: 'Invalid email or password' });
         }
         
-        if (!user || !password) {
+        if (password!=user.password) {
           return res.status(401).json({ error: 'Invalid email or password' });
       }
-        // res.redirect(301, '/Weather');
         await coll.updateOne({ email }, { $set: { flag: 1 } });
         res.status(200).json({ user });
     } catch (error) {
@@ -49,6 +48,18 @@ app.post('/logIn',bodyParser.json(),async(req,res)=>{
     }
 })
 
+app.get('/user', bodyParser.json(), async (req, res) => {
+  try {
+    var query = await coll.findOne({ flag: 1 });
+    console.log('Flag:', query);
+    const { name:username } = query;
+    console.log("UserName",username)
+    res.status(200).json({ username });
+  } catch (error) {
+    console.error('Error during user query:', error);
+    res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
 
 app.post('/regist', bodyParser.json(), async (req, res) => {
   try {
@@ -86,6 +97,51 @@ app.post('/regist', bodyParser.json(), async (req, res) => {
     res.status(500).json({ error: 'Internal server error', details: error.message });
   }
 });
+
+app.post('/logOut', bodyParser.json(), async (req, res) => {
+  try {
+    console.log('Received logOut request');
+    console.log("req: ",req.body)
+    const { name } = req.body; 
+    const query = await coll.findOne({ name, flag: 1 });
+    console.log("qurey: ", query)
+    if (query) {
+      const updates = await coll.updateOne({ name }, { $set: { flag: 0 } });
+      console.log('Flag updated:', updates);
+      res.status(200).json({ success: true, message: 'Logout successful' });
+    } else {
+      res.status(404).json({ success: false, message: 'User not found or already logged out' });
+    }
+  } catch (error) {
+    console.error('Error during user query:', error);
+    res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
+
+app.post('/history', bodyParser.json(), async(req,res)=>{
+
+  try {
+    const { history } = req.body;
+
+    const userWithFlagOne = await User.findOne({ flag: 1 });
+
+    if (userWithFlagOne) {
+      userWithFlagOne.history = history;
+      await userWithFlagOne.save();
+    } else{
+      const newHistory = new SearchHistory({
+        _id: userId,
+        history: history
+      });
+      await newHistory.save();
+    }
+
+    res.status(200).json({ success: true, message: 'Search history stored successfully' });
+  } catch (error) {
+    console.error('Error during storing search history:', error);
+    res.status(500).json({ success: false, message: 'Internal server error', details: error.message });
+  }
+})
 
 var server = app.listen(9000, function () {
   var host = server.address().address;
