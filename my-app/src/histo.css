@@ -1,0 +1,74 @@
+.imageHist{
+    background-image: url("image/137180.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.CentHist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.text-marginHist{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.NavBgColor{
+    background-color: rgb(179 241 255 / 10%) !important ;
+    border: solid rgba(0, 0, 0, 0.03) !important;
+    box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 8%) !important;
+}
+
+.BorderHist{
+    background-color: rgb(179 241 255 / 15%);
+    border: solid rgba(0, 0, 0, 0.10);
+    box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 10%); 
+    border-radius: 40px;
+    height: 350px;
+    width: 755px
+}
+.textHist{
+    text-align: center;
+    padding-top: 40px;
+    padding-left: 90px
+}
+
+.txtPosition{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 30px;
+    font-size: xx-large;
+    font-weight: 600;
+}
+
+.history-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.history-list li {
+    width: calc(100% / 6); 
+    box-sizing: border-box;
+    padding: 5px; 
+    position: relative;
+}
+.history-number{
+    font-weight: 700;
+}
+
+@media (max-width: 1500px) {
+    .CentHist {
+        padding-top: 20px; 
+    }
+
+    .textHist {
+        padding-left: 20px; 
+    }
+    
+}
