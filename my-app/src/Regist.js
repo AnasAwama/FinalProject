@@ -1,6 +1,8 @@
 import React ,{Component}from "react"
-import { BrowserRouter as Router, Routes, Route ,Link,useNavigate} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route ,Link} from 'react-router-dom';
 import './Regist.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 class Regist extends React.Component{
     constructor(props){
@@ -12,12 +14,23 @@ class Regist extends React.Component{
             gender:"",
             age:0,
             flag:0,
+            history: [],
+            showPassword: false,
+            showConfPassword:false,
         };
         this.handleSubmit=this.handleSubmit.bind(this);
     }
 
-    // MyComponent = () => {
-    //     const navigate = useNavigate();}
+    togglePasswordVisibility = () => {
+        this.setState((prevState) => ({
+            showPassword: !prevState.showPassword,
+        }));
+    };
+    toggleConfPasswordVisibility = () => {
+        this.setState((prevState) => ({
+            showConfPassword: !prevState.showConfPassword,
+        }));
+    };
 
     handleAgeChange = (e) => {
         this.setState({ age: parseInt(e.target.value) });
@@ -26,12 +39,8 @@ class Regist extends React.Component{
     handleSubmit = async (e) => {
         e.preventDefault();
         const { name, email, password, age, gender, confirmPassword} = this.state;
-        //const navigate = useNavigate();
-        console.log("Form Values: ", name, email, password, gender, age,confirmPassword);
-        // if (password !== confirmPassword) {
-        //     alert('Passwords do not match');
-        //     return;
-        // }
+        console.log("Form Values: ", name, email, password, gender, age);
+
         try {
             const res = await fetch("http://localhost:9000/regist", {
                 method: "post",
@@ -103,8 +112,12 @@ class Regist extends React.Component{
                             <input className="formInput" type="email" name="email" onChange={e=>this.setState({email:e.target.value})} placeholder="Email Address" required/>
                         </div><br/>
                         <div class="formInputGroup">
-                            <input className="formInput" type="password" name="password" onChange={e=>this.setState({password:e.target.value})} placeholder="Create Password" required/>
-                            <input className="formInput" type="password" name="confirmPassword" placeholder="Confirm Password" required/>
+                            <input className="formInput" type={this.state.showPassword ? "text" : "password"} name="password" onChange={e=>this.setState({password:e.target.value})} placeholder="Create Password" required/>
+                            <FontAwesomeIcon className="EyeMargin" icon={this.state.showPassword ? faEye : faEyeSlash} onClick={this.togglePasswordVisibility} />
+                            <input className="formInput" type={this.state.showConfPassword ? "text" : "password"} name="confirmPassword" placeholder="Confirm Password" required/>
+                            <div className="EyeMargin">
+                                <FontAwesomeIcon icon={this.state.showConfPassword ? faEye : faEyeSlash} onClick={this.toggleConfPasswordVisibility} />
+                            </div>
                         </div><br/>
                         <label>Age: </label>
                         <input
