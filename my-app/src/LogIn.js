@@ -1,15 +1,25 @@
 import React from "react"
 import { BrowserRouter as Router, Routes, Route ,Link , useHistory} from 'react-router-dom';
 import './Login.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 class LogIn extends React.Component{
     constructor(props){
         super(props);
         this.state={
             email:"",
             password:"",
+            showPassword: false,
         };
         this.handleSubmit=this.handleSubmit.bind(this);
     }
+
+    togglePasswordVisibility = () => {
+        this.setState((prevState) => ({
+            showPassword: !prevState.showPassword,
+        }));
+    };
 
     handleSubmit = async (e) => {
         
@@ -85,7 +95,9 @@ class LogIn extends React.Component{
                     <form onSubmit={this.handleSubmit} method="post">
                         <h1 className="Logh1">Log In Page</h1>
                         <input className="formMid" type="Text" name="email" onChange={e=>this.setState({email:e.target.value})} placeholder="Enter Your Email"/><br/>
-                        <input className="formMid" type="Password" name="password" onChange={e=>this.setState({password:e.target.value})} placeholder="Enter Your Password"/><br/>
+                        <input className="formMid" type={this.state.showPassword ? "text" : "password"} name="password" onChange={e=>this.setState({password:e.target.value})} placeholder="Enter Your Password"/>
+                        <FontAwesomeIcon icon={this.state.showPassword ? faEye : faEyeSlash} onClick={this.togglePasswordVisibility} />
+                        <br/>
                         <input className="btn btn-light formbut" type="Submit" name="submit"/>
                         <div className="FontSize">If you do not have an account <Link className="FontColor" to="/Regist">Sing-Up Here</Link></div>
                     </form>
