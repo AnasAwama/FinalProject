@@ -61,6 +61,26 @@ app.get('/user', bodyParser.json(), async (req, res) => {
   }
 });
 
+app.get('/userData', bodyParser.json(), async (req, res) => {
+  try {
+      var query = await coll.findOne({ flag: 1 });
+      console.log('Flag:', query);
+
+      if (!query) {
+          console.error('No document found with flag: 1');
+          res.status(404).json({ error: 'Document not found' });
+          return;
+      }
+
+      const { name, email, password, gender, age } = query;
+
+      res.status(200).json({ name, email, password, gender, age });
+  } catch (error) {
+      console.error('Error during user query:', error);
+      res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
+
 app.post('/regist', bodyParser.json(), async (req, res) => {
   try {
     console.log('Received data:', req.body);
@@ -83,6 +103,7 @@ app.post('/regist', bodyParser.json(), async (req, res) => {
         'age':age,
         'gender':gender,
         flag: 1,
+        'history': []
     };
 
     const result = await coll.insertOne(user);
@@ -118,22 +139,17 @@ app.post('/logOut', bodyParser.json(), async (req, res) => {
   }
 });
 
-app.post('/history', bodyParser.json(), async(req,res)=>{
 
+app.post('/history',bodyParser.json(), async(req, res) => {
   try {
-    const { history } = req.body;
+    const { name, history } = req.body;
 
-    const userWithFlagOne = await User.findOne({ flag: 1 });
+    const user = await coll.findOne({ name, flag: 1 });
 
-    if (userWithFlagOne) {
-      userWithFlagOne.history = history;
-      await userWithFlagOne.save();
-    } else{
-      const newHistory = new SearchHistory({
-        _id: userId,
-        history: history
-      });
-      await newHistory.save();
+    if (user) {
+      await coll.updateOne({ name, flag: 1 }, { $push: { history: history } });
+    } else {
+      return res.status(404).json({ success: false, message: 'User not found or not logged in' });
     }
 
     res.status(200).json({ success: true, message: 'Search history stored successfully' });
@@ -141,7 +157,53 @@ app.post('/history', bodyParser.json(), async(req,res)=>{
     console.error('Error during storing search history:', error);
     res.status(500).json({ success: false, message: 'Internal server error', details: error.message });
   }
-})
+});
+
+app.get('/getHist', bodyParser.json(), async (req, res) => {
+  try {
+    const user = await coll.findOne({ flag: 1 });
+
+    if (user) {
+      const history = user.history || [];
+      res.status(200).json({ success: true, getHistory: history });
+    } else {
+      res.status(404).json({ success: false, message: 'User not found or not logged in' });
+    }
+  } catch (error) {
+    console.error('Error during retrieving search history:', error);
+    res.status(500).json({ success: false, message: 'Internal server error', details: error.message });
+  }
+});
+
+app.post('/UpdateProfile', bodyParser.json(), async (req, res) => {
+  try {
+      const { name, email, password, age, gender } = req.body;
+
+      const query = { flag: 1 };
+      const update = {
+          $set: {
+              name: name,
+              email: email,
+              password: password,
+              age: age,
+              gender: gender,
+          },
+      };
+
+      const result = await coll.updateOne(query, update);
+
+      if (result.modifiedCount > 0) {
+          console.log('Profile updated successfully');
+          res.status(200).json({ success: true, message: 'Profile updated successfully' });
+      } else {
+          console.error('No matching user found for update');
+          res.status(404).json({ success: false, message: 'User not found for update' });
+      }
+  } catch (error) {
+      console.error('Error during profile update:', error);
+      res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
 
 var server = app.listen(9000, function () {
   var host = server.address().address;
