@@ -79,16 +79,18 @@ class Weather extends React.Component{
         });
         this.componentDidMount();
         this.fetchWeather();
+        this.handleHistory();
     }
-    handleHistory=async(e)=>{
+    handleHistory=async()=>{
         try{
-            const hist = await fetch("http://localhost:9000/History", {
+            console.log('history is woriking')
+            const hist = await fetch("http://localhost:9000/history", {
             method: 'POST',
             headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
             },
-            body: JSON.stringify({history: this.state.newSearchValue}),
+            body: JSON.stringify({name: this.state.username, history: this.state.newSearchValue}),
         });
     
         if (hist.ok) {
@@ -126,6 +128,7 @@ class Weather extends React.Component{
     }
     
     render(){
+        
         return(
             
             <body className="image">
@@ -139,6 +142,7 @@ class Weather extends React.Component{
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                         {/* add item */}
+                        <Link to="/Histo"  class="nav-link active" aria-current="page">History</Link>
                         </li>
                     </ul>
                     {this.state.username ? (
@@ -149,7 +153,7 @@ class Weather extends React.Component{
                         <div className="menu">
                         <ul>
                             <li>
-                                <img className="img2" src={require("./image/edit-profile.png")}/><Link to="/">Edit Profile</Link>
+                                <img className="img2" src={require("./image/edit-profile.png")}/><Link to="/Edit">Edit Profile</Link>
                             </li>
                             <li>
                             <img className="img2" src={require("./image/logout.png")} /><input type="button" className="logoutButton" value="Logout" onClick={this.handleLogout}/>
@@ -166,7 +170,7 @@ class Weather extends React.Component{
                     </div>
                 </div>
             </nav>
-            {/* </form> */}
+            
             <div className="formCent">
                 <form>
                     <input type="text" placeholder="Enter City" onChange={this.handleSearchChange} value={this.state.search}/>
