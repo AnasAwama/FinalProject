@@ -20,27 +20,36 @@
     text-align: center;
     padding-top: 40px;
     padding-bottom: 20px;
-    font-size: 36px;
+    font-size: 40px;
+    font-family:"poor story";
+    /* font-size: x-large; */
+    font-weight: 600;
 }
 
 .formInputGroup {
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    width: 100px;
+    width: 700px; 
     
 }
 .formInput {
     display: inline-block;
-    margin: 0 50px 0px;
+    margin: 0 16px 0px;
     width: 260px;
+    
+    font-family:"poor story";
+    font-size: large;
+    font-weight: 600;
 }
+
 
 .formInput:focus {
     outline: none;
 }
 
 .formInput::placeholder {
-    text-align: center;
+    text-align: left;
+    padding-left: 50px;
 }
 
 .formbutReg{
@@ -51,6 +60,10 @@
     align-items: center;
     margin-bottom: 13px;
     margin-left: 230px;
+    
+    font-family:"poor story";
+    font-size: large;
+    font-weight: 500;
 }
 
 .formbutReg:hover {
@@ -63,12 +76,56 @@
     width: 300px;
 }
 
-.formRadioGroup{
-    margin-left: 130px; 
+.LabelAge {
+    margin-left: 62px;
+    font-family:"poor story";
+    font-size: larger;
+    font-weight: 600;
+}
+
+.formRangeContainer {
+    display: flex;
+    align-items: center;
+}
+
+.formRangeInput {
+    width: 0px;
+    margin-right: 10px; 
+}
+
+.outputAge {
+    font-size: 16px; 
+    font-family:"poor story";
+    font-size: large;
+    font-weight: 500;
 }
 
 label{
     margin-left: 62px;
+    
+}
+
+.labelGender {
+    display: flex;
+    align-items: center;
+    margin-left: 62px;
+    
+}
+
+.labelGender span {
+    margin-right: 10px; 
+    font-family:"poor story";
+    font-size: larger;
+    font-weight: 600;
+}
+
+.formRadioGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family:"poor story";
+    font-size: larger;
+    font-weight: 500;
 }
 
 .formInputDate {
@@ -85,9 +142,12 @@ label{
     text-align: center;
 }
 
-.FontSize{
+.FontSizeReg{
     margin-left: 190px;
-    font-size: 12px;
+    font-size: 16px;
+    font-family:"poor story";
+    
+    font-weight: 500;
 }
 .FontColor{
 color:blue;
@@ -104,8 +164,21 @@ color:blue;
     color:blue;
 }
 
-.EyeMargin{
-    margin-left: 10px;
+.EyeMarginLeft{
+    display: flex;
+    position: absolute;
+    right: 150px;
+    top: 51%; 
+    transform: translateY(-50%); 
+    opacity: 0.5;
+}
+.EyeMarginRight{
+    display: flex;
+    position: absolute;
+    right: 440px;
+    top: 51%; 
+    transform: translateY(-50%); 
+    opacity: 0.5;
 }
 
 @media (max-width: 1500px) {
@@ -116,7 +189,7 @@ color:blue;
         }
 
     .Regh1 {
-        font-size: 24px;
+        font-size: 32px;
     }
 
 
