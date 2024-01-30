@@ -143,16 +143,20 @@ app.post('/logOut', bodyParser.json(), async (req, res) => {
 app.post('/history',bodyParser.json(), async(req, res) => {
   try {
     const { name, history } = req.body;
-
+    const { city, temperature } = history;
     const user = await coll.findOne({ name, flag: 1 });
 
     if (user) {
-      await coll.updateOne({ name, flag: 1 }, { $push: { history: history } });
+      const updatedHistory = {
+        city,
+        temperature,
+      };
+
+      await coll.updateOne({ name, flag: 1 }, { $push: { history: updatedHistory } });
+      res.status(200).json({ success: true, message: 'Search history stored successfully' });
     } else {
       return res.status(404).json({ success: false, message: 'User not found or not logged in' });
     }
-
-    res.status(200).json({ success: true, message: 'Search history stored successfully' });
   } catch (error) {
     console.error('Error during storing search history:', error);
     res.status(500).json({ success: false, message: 'Internal server error', details: error.message });
@@ -204,7 +208,26 @@ app.post('/UpdateProfile', bodyParser.json(), async (req, res) => {
       res.status(500).json({ error: 'Internal server error', details: error.message });
   }
 });
+app.post('/clearHistory',bodyParser.json(),async(req,res)=>{
+  try {
+    const { name } = req.body;
 
+    const query = { name, flag: 1 };
+    const update = { $set: { history: [] } };
+
+    const result = await coll.updateOne(query, update);
+    if (result.modifiedCount > 0) {
+      console.log('Search history cleared successfully');
+      res.status(200).json({ success: true, message: 'Search history cleared successfully' });
+    } else {
+      console.error('No matching user found for clearing history');
+      res.status(404).json({ success: false, message: 'User not found for clearing history' });
+    }
+  } catch (error) {
+    console.error('Error during clearing search history:', error);
+    res.status(500).json({ success: false, message: 'Internal server error', details: error.message });
+  }
+});
 var server = app.listen(9000, function () {
   var host = server.address().address;
   var port = server.address().port;
