@@ -1,0 +1,176 @@
+.BorderEdit {
+    background-color: rgb(179 241 255 / 15%);
+    border: solid rgba(0, 0, 0, 0.10);
+    box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 10%);
+    border-radius: 40px;
+    height: 430px; 
+    width: 600px;
+    margin-left:500px;
+    margin-top: 60px;
+}
+
+.imageEdit{
+    background-image: url("image/137180.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.Edith1 {
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    font-family:"poor story";
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.formInputGroupEdit {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 700px; 
+    
+}
+
+.formInputContainer {
+    
+    margin-bottom: 10px; 
+}
+.formInputEdit {
+    display: inline-block;
+    margin: 0 16px 0px;
+    width: 260px;
+    
+    font-family:"poor story";
+    font-size: large;
+    font-weight: 500;
+}
+
+
+.formInputEdit:focus {
+    outline: none;
+}
+
+.formInputEdit::placeholder {
+    text-align: left;
+    padding-left: 50px;
+}
+
+.formbutEdit{
+    width:90px;
+    display: inline;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 13px;
+    margin-left: 255px;
+    
+    font-family:"poor story";
+    font-size: large;
+    font-weight: 500;
+}
+
+.formbutEdit:hover {
+    background-color: rgb(226, 226, 226);
+}
+.formRadioGroupEdit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.LabelAgeEdit {
+    margin-left: 62px;
+    font-family:"poor story";
+    font-size: larger;
+    font-weight: 600;
+}
+
+.formRangeContainerEdit {
+    display: flex;
+    align-items: center;
+}
+
+.formRangeInputEdit {
+    width: 300px;
+    margin-right: 10px; 
+    margin-top: 3px;
+}
+
+.outputAgeEdit {
+    font-size: 18px; 
+    font-family:"poor story";
+    font-weight: 600;
+}
+
+.lableMarg{
+    display: flex;
+    margin-left: 62px;
+    font-family:"poor story";
+    font-size: larger;
+    font-weight: 600;
+}
+
+.labelGenderEdit {
+    display: flex;
+    align-items: center;
+    margin-left: 62px;
+    font-family:"poor story";
+    font-size: larger;
+    font-weight: 550;
+}
+
+.labelGenderEdit span {
+    margin-right: 10px; 
+    font-weight: 600;
+    font-size: larger;
+}
+
+.formRadioGroupEdit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.formInputEditDate {
+    display: inline-block;
+    margin: 0 14px 0px;
+    width: 352px;
+}
+
+.formInputEditDate:focus {
+    outline: none;
+}
+
+.formInputEditDate::placeholder {
+    text-align: center;
+}
+
+.EyeMarginEdit{
+    display: flex;
+    position: absolute;
+    right: 220px;
+    top: 51%; 
+    transform: translateY(-50%); 
+    opacity: 0.5;
+}
+
+@media (max-width: 1500px) {
+    .BorderEdit {
+        width: 590px;
+        margin-left: 100px;
+        margin-top: 100px; 
+        }
+
+    .Edith1 {
+        font-size: 24px;
+    }
+
+
+    .formbutEdit {
+        margin-left: 240px;
+    }
+}
