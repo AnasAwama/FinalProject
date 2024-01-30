@@ -1,11 +1,18 @@
 import React,{useEffect,useState} from "react"
 import { BrowserRouter as Router, Routes, Route ,Link} from 'react-router-dom';
+import WebFont from 'webfontloader';
 import './nav.css';
 import './weather.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-const formatDay = (dateString) => {
+WebFont.load({
+    google: {
+      families: ['Poor Story:400,1000'] 
+    }
+  });
+  
+  const formatDay = (dateString) => {
     const options = { weekday: 'long' };
     return new Date(dateString).toLocaleDateString(undefined, options);
 };
@@ -90,7 +97,7 @@ class Weather extends React.Component{
             "Content-Type": "application/json",
             Accept: "application/json",
             },
-            body: JSON.stringify({name: this.state.username, history: this.state.newSearchValue}),
+            body: JSON.stringify({name: this.state.username, history: {city:this.state.newSearchValue, temperature: this.state.dataApi.list[0].main.temp,}}),
         });
     
         if (hist.ok) {
@@ -103,6 +110,28 @@ class Weather extends React.Component{
         console.error("Error during Storing:", error);
         }
     }
+    // handleResult=async()=>{
+    //     try{
+    //         console.log('history is woriking')
+    //         const hist = await fetch("http://localhost:9000/history", {
+    //         method: 'POST',
+    //         headers: {
+    //         "Content-Type": "application/json",
+    //         Accept: "application/json",
+    //         },
+    //         body: JSON.stringify({name: this.state.username, history: {city:this.state.newSearchValue, temperature: this.state.dataApi.list[0].main.temp,}}),
+    //     });
+    
+    //     if (hist.ok) {
+    //         console.log("data Stored successfully");
+            
+    //     } else {
+    //         console.error("No Data Stored");
+    //     }
+    //     } catch (error) {
+    //     console.error("Error during Storing:", error);
+    //     }
+    // }
 
     handleLogout = async () => {
         try {
@@ -130,11 +159,10 @@ class Weather extends React.Component{
     render(){
         
         return(
-            
             <body className="image">
             <nav class="navbar navbar-expand-lg ">
                 <div class="container-fluid ">
-                <Link to="/" class="navbar-brand " >Weather App</Link>
+                <Link to="/" style={{fontSize:"xx-Large"}} class="fontFamily navbar-brand  " >Weather App</Link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -142,29 +170,29 @@ class Weather extends React.Component{
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                         {/* add item */}
-                        <Link to="/Histo"  class="nav-link active" aria-current="page">History</Link>
+                        <Link to="/Histo" style={{fontSize:"x-Large",marginTop:"10px"}}  class=" fontFamily nav-link active" aria-current="page">History</Link>
                         </li>
                     </ul>
                     {this.state.username ? (
                     <div className="action">
                         <div className="profile" onClick={()=>this.menuToggle()}>
-                            <p class="Text navbar-text">Welcome, {this.state.username}</p>
+                            <p style={{fontSize:"x-Large"}} class="fontFamily Text navbar-text">Welcome, {this.state.username}</p>
                         </div>
                         <div className="menu">
                         <ul>
                             <li>
-                                <img className="img2" src={require("./image/edit-profile.png")}/><Link to="/Edit">Edit Profile</Link>
+                                <img className="img2" src={require("./image/edit-profile.png")}/><Link to="/Edit" style={{fontSize:"Large"}} className="fontFamily">Edit Profile</Link>
                             </li>
                             <li>
-                            <img className="img2" src={require("./image/logout.png")} /><input type="button" className="logoutButton" value="Logout" onClick={this.handleLogout}/>
+                            <img className="img2" src={require("./image/logout.png")} /><input type="button" style={{fontSize:"Large"}} className="fontFamily logoutButton" value="Logout" onClick={this.handleLogout}/>
                             </li>
                         </ul>
                         </div>
                     </div>
             ) : (
                 <>
-                    <Link to="/LogIn" type="button" class="btn btn-outline-dark Lright">Log-In</Link>
-                    <Link to="/Regist" type="button" class="btn btn-outline-light Sright">Sign-Up</Link>
+                    <Link to="/LogIn" type="button" style={{fontFamily:"poor story", fontSize:"large",fontWeight:"500"}} class=" btn btn-outline-dark  Lright">Log-In</Link>
+                    <Link to="/Regist" type="button" style={{fontFamily:"poor story", fontSize:"large",fontWeight:"500"}} class=" btn btn-outline-light  Sright">Sign-Up</Link>
                 </>
             )}
                     </div>
@@ -173,7 +201,7 @@ class Weather extends React.Component{
             
             <div className="formCent">
                 <form>
-                    <input type="text" placeholder="Enter City" onChange={this.handleSearchChange} value={this.state.search}/>
+                    <input type="text" className="BoxFont" style={{fontSize:"large"}} placeholder="Enter City" onChange={this.handleSearchChange} value={this.state.search}/>
                 </form>
             </div>
             <div className="Cent">
@@ -188,10 +216,10 @@ class Weather extends React.Component{
                         <td><div className="text">
                         {this.state.dataApi && this.state.dataApi.list && this.state.dataApi.list[0] && (
                                         <>
-                                            <p className="text-margin">{formatDay(this.state.dataApi.list[0].dt_txt)} {new Date(this.state.dataApi.list[0].dt_txt).toLocaleTimeString()}</p>
-                                            <h1 className="text-margin">{this.state.dataApi.city.name}</h1>
-                                            <p className="text-margin">Temperature: {Math.round(this.state.dataApi.list[0].main.temp - 273.15)}<sup>°</sup> C</p>
-                                            <p className="text-margin">{this.state.dataApi.list[0].weather[0].description}</p>
+                                            <p className="text-margin BoxFont" style={{fontSize:"large"}}>{formatDay(this.state.dataApi.list[0].dt_txt)} {new Date(this.state.dataApi.list[0].dt_txt).toLocaleTimeString()}</p>
+                                            <h1 className="text-margin BoxFont" style={{fontSize:"xx-larger",fontWeight: '600'}}>{this.state.dataApi.city.name}</h1>
+                                            <p className="text-margin BoxFont" style={{fontSize:"large"}}>Temperature: {Math.round(this.state.dataApi.list[0].main.temp - 273.15)}<sup>°</sup> C</p>
+                                            <p className="text-margin BoxFont" style={{fontSize:"large" }} >{this.state.dataApi.list[0].weather[0].description}</p>
                                         </>
                                     )}
                         </div></td>
@@ -204,13 +232,13 @@ class Weather extends React.Component{
                 index > 0 && index < 6 && (
                     <div key={index}>
                         <div className={"smallBorder smallText"}>
-                            <p style={{ fontWeight: 'bold', marginTop: '10px', marginBottom: '7px' }}>{formatDay(day.dt_txt)}</p>
+                            <p style={{ fontWeight: '860',fontSize:"x-larger", marginTop: '10px', marginBottom: '7px' }} className="BoxFont">{formatDay(day.dt_txt)}</p>
                             {day.weather.map((weatherEntry, weatherIndex) => (
                                 <React.Fragment key={weatherIndex}>
                                     <img src={require(`./image/${weatherEntry.icon}.png`)} alt={`Weather`} />
                                 </React.Fragment>
                             ))}
-                            <p style={{ marginTop: '-2px' }}>{Math.round(day.main.temp - 273.15)}<sup>°</sup> C</p>
+                            <p style={{ marginTop: '-2px' }} className="BoxFont">{Math.round(day.main.temp - 273.15)}<sup>°</sup> C</p>
                         </div>
                     </div>
                 )
