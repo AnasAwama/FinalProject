@@ -77,7 +77,7 @@ class LogIn extends React.Component{
             <body className="imageLog">
                 <nav class="navbar navbar-expand-lg ">
                     <div class="container-fluid ">
-                    <Link to="/" class="navbar-brand " >Weather App</Link>
+                    <Link to="/" style={{fontSize:"xx-Large"}} class="fontFamily navbar-brand " >Weather App</Link>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                         </button>
@@ -96,9 +96,11 @@ class LogIn extends React.Component{
                         <h1 className="Logh1">Log In Page</h1>
                         <input className="formMid" type="Text" name="email" onChange={e=>this.setState({email:e.target.value})} placeholder="Enter Your Email"/><br/>
                         <input className="formMid" type={this.state.showPassword ? "text" : "password"} name="password" onChange={e=>this.setState({password:e.target.value})} placeholder="Enter Your Password"/>
+                        <div className="EyeMargin">
                         <FontAwesomeIcon icon={this.state.showPassword ? faEye : faEyeSlash} onClick={this.togglePasswordVisibility} />
+                        </div>
                         <br/>
-                        <input className="btn btn-light formbut" type="Submit" name="submit"/>
+                        <input className="btn btn-light formbut" type="Submit" value="Log-In"/>
                         <div className="FontSize">If you do not have an account <Link className="FontColor" to="/Regist">Sing-Up Here</Link></div>
                     </form>
                 </div>
