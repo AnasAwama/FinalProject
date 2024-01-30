@@ -9,7 +9,7 @@ class Histo extends React.Component{
             username:"",
             getHistory:[],
             currentPage: 1,
-            itemsPerPage: 18,
+            itemsPerPage: 6,
         };
         
     }
