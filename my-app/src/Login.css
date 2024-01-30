@@ -18,7 +18,10 @@
 .Logh1{
     text-align: center;
     padding-top: 40px;
-    padding-bottom: 20px
+    padding-bottom: 20px;
+    font-family:"poor story";
+    font-size: 40px;
+    font-weight: 600;
 }
 
 .formMid{
@@ -27,7 +30,10 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 13px;
-    margin-left: 15px;
+    margin-left: 20px;
+    font-family:"poor story";
+    font-size: large;
+    font-weight: 500;
 }
 
 .formMid:focus{
@@ -35,6 +41,9 @@
 }
 .formMid::placeholder{
 text-align: center;
+font-family:"poor story";
+font-size: large;
+font-weight: 500;
 }
 
 .formbut{
@@ -45,14 +54,19 @@ text-align: center;
     align-items: center;
     margin-bottom: 13px;
     margin-left: 230px;
+    font-family:"poor story";
+    font-size: large;
+    font-weight: 500;
 }
 .formbut:hover{
     background-color:rgb(226, 226, 226)
 }
 
 .FontSize{
-    margin-left: 100px;
-    font-size: 12px;
+    margin-left: 180px;
+    font-size: 16px;
+    font-family:"poor story";
+    font-weight: 500;
 }
 .FontColor{
 color:blue;
@@ -68,7 +82,14 @@ color:blue;
 .FontColor:active{
     color:blue;
 }
-
+.EyeMargin{
+    display: flex;
+    position: absolute;
+    right: 525px;
+    top: 54.1%; 
+    transform: translateY(-50%); 
+    opacity: 0.5;
+}
 @media (max-width: 1500px) {
     .BorderLog {
         width: 80%;
@@ -90,4 +111,8 @@ color:blue;
         margin-left: 265px;
     }
 
+    .EyeMargin{
+        right: 150px;
+        top: 51.5%; 
+    }
 }
