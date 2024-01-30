@@ -26,13 +26,13 @@
     border: solid rgba(0, 0, 0, 0.10);
     box-shadow: 3px 4px 12px 3px rgb(0 0 0 / 10%); 
     border-radius: 40px;
-    height: 350px;
-    width: 755px
+    height: 400px;
+    width: 760px
 }
 .textHist{
     text-align: center;
-    padding-top: 40px;
-    padding-left: 90px
+    padding-top: 20px;
+    padding-left: 20px
 }
 
 .txtPosition{
@@ -41,6 +41,7 @@
     align-items: center;
     margin-left: 10px;
     margin-top: 30px;
+    font-family:"poor story";
     font-size: xx-large;
     font-weight: 600;
 }
@@ -50,6 +51,9 @@
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    font-family:"poor story";
+    font-size: large;
+    font-weight: 500;
 }
 
 .history-list li {
@@ -59,9 +63,43 @@
     position: relative;
 }
 .history-number{
+    font-family:"poor story";
+    font-size: larger;
     font-weight: 700;
 }
-
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: -6px 298px;
+    font-family:"poor story";
+    font-size: large;
+    font-weight: 500;
+  }
+  
+  .pagination a {
+    color: black;
+    padding: 5px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+  }
+  
+  .pagination a:hover {
+    background-color: #ddd;
+  }
+  
+  .pagination .active {
+    background-color: #ffaefe;
+    color: white;
+    border: 1px solid #ffaefe;
+  }
+  .formbutHisr{
+    margin: 18px 326px;
+    width: 120px;
+    font-family:"poor story";
+    font-size: large;
+    font-weight: 500;
+  }
 @media (max-width: 1500px) {
     .CentHist {
         padding-top: 20px; 
