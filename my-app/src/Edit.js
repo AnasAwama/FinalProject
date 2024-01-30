@@ -118,6 +118,7 @@ class Edit extends React.Component{
             
             if (data.success) {
                 console.log("Profile updated successfully");
+                alert("Profile updated successfully");
                 this.setState({
                     name: data.user.name,
                     email: data.user.email,
@@ -127,8 +128,7 @@ class Edit extends React.Component{
                 }, () => {
                     console.log("Updated state:", this.state);
                 });
-                // Redirect to the Edit page if needed
-                // window.location.href = '/Edit';
+                
             } else {
                 console.error('Profile update failed');
             }
@@ -162,10 +162,10 @@ class Edit extends React.Component{
     render(){
 
         return(
-            <body className="imageReg">
+            <body className="imageEdit">
             <nav class="navbar navbar-expand-lg ">
                 <div class="container-fluid ">
-                <Link to="/" class="navbar-brand " >Weather App</Link>
+                <Link to="/" style={{fontSize:"xx-Large"}} class="fontFamily navbar-brand " >Weather App</Link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -173,58 +173,68 @@ class Edit extends React.Component{
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                         {/* add item */}
-                        <Link to="/Histo"  class="nav-link active" aria-current="page">History</Link>
+                        <Link to="/Histo" style={{fontSize:"x-Large",marginTop:"10px"}} class="fontFamily nav-link active" aria-current="page">History</Link>
                         </li>
                     </ul>
                     {this.state.username ? (
                     <div className="action">
                         <div className="profile" onClick={()=>this.menuToggle()}>
-                            <p class="Text navbar-text">Welcome, {this.state.username}</p>
+                            <p style={{fontSize:"x-Large"}} class="fontFamily Text navbar-text">Welcome, {this.state.username}</p>
                         </div>
                         <div className="menu">
                         <ul>
                             <li>
-                                <img className="img2" src={require("./image/edit-profile.png")}/><Link to="/Edit">Edit Profile</Link>
+                                <img className="img2" src={require("./image/edit-profile.png")}/><Link to="/Edit" style={{fontSize:"Large"}} className="fontFamily" >Edit Profile</Link>
                             </li>
                             <li>
-                            <img className="img2" src={require("./image/logout.png")} /><input type="button" className="logoutButton" value="Logout" onClick={this.handleLogout}/>
+                            <img className="img2" src={require("./image/logout.png")} /><input type="button" style={{fontSize:"Large"}} className="fontFamily logoutButton" value="Logout" onClick={this.handleLogout}/>
                             </li>
                         </ul>
                         </div>
                     </div>
             ) : (
                 <>
-                    <Link to="/LogIn" type="button" class="btn btn-outline-dark Lright">Log-In</Link>
-                    <Link to="/Regist" type="button" class="btn btn-outline-light Sright">Sign-Up</Link>
+                    <Link to="/LogIn" type="button" class="fontFamily btn btn-outline-dark Lright">Log-In</Link>
+                    <Link to="/Regist" type="button" class="fontFamily btn btn-outline-light Sright">Sign-Up</Link>
                 </>
             )}
                     </div>
                 </div>
             </nav>
-                <div className="BorderReg">
+                <div className="BorderEdit">
                     <form onSubmit={this.handleUpdate} method="post">
-                        <h1 className="Regh1">Edit your Profile</h1>
-                        <div class="formInputGroup">
-                        <label>Change your Name: </label>
-                            <input className="formInput" type="text" name="name"  value={this.state.name||"Full Name"} onChange={e=>this.setState({name:e.target.value})} p required/>
-                            <label>Change your Email: </label>
-                            <input className="formInput" type="email" name="email"  value={this.state.email || "Email Address"} onChange={e=>this.setState({email:e.target.value})}  required/>
+                        <h1 className="Edith1">Edit your Profile</h1>
+                        <div class="formInputGroupEdit">
+                        <div className="formInputContainer">
+                            <label className="lableMarg">Change your Name: </label><br/>
+                            <input className="formInputEdit" type="text" name="name"  value={this.state.name||"Full Name"} onChange={e=>this.setState({name:e.target.value})} p required/>
+                        </div>
+                        <div className="formInputContainer">
+                            <label className="lableMarg">Change your Email: </label><br/>
+                            <input className="formInputEdit" type="email" name="email"  value={this.state.email || "Email Address"} onChange={e=>this.setState({email:e.target.value})}  required/>
+                        </div>
                         </div><br/>
-                        <div class="formInputGroup">
-                        <label>Change yor Password: </label>
-                            <input className="formInput" type={this.state.showPassword ? "text" : "password"} name="password"  value={this.state.password ||"Create Password"} onChange={e=>this.setState({password:e.target.value})} required/>
+                        <div class="formInputGroupEdit">
+                        <label className="lableMarg">Change yor Password: </label>
+                            <input className="formInputEdit" type={this.state.showPassword ? "text" : "password"} name="password"  value={this.state.password ||"Create Password"} onChange={e=>this.setState({password:e.target.value})} required/>
+                            <div className="EyeMarginEdit">
                             <FontAwesomeIcon icon={this.state.showPassword ? faEye : faEyeSlash} onClick={this.togglePasswordVisibility} />
+                            </div>
                         </div><br/>
-                        <label>Age: </label>
-                        <input type="range" className="formInput" min="0" max="100" value={this.state.age} onChange={this.handleAgeChange} name="age" />
-                            <output>{this.state.age}</output><br/><br/>
-                        <label>Gender:</label>
-                        <div className="formRadioGroup">
+                        <div className="formRangeContainerEdit">
+                        <label className="LabelAgeEdit">Age: </label>
+                        <input type="range" className="formInputEdit formRangeInputEdit" min="0" max="100" value={this.state.age} onChange={this.handleAgeChange} name="age" />
+                        <output className="outputAgeEdit">{this.state.age}</output><br/><br/>
+                        </div>
+                        <label className="labelGenderEdit"><span>Gender:</span>
+                        <div className="formRadioGroupEdit">
                         <input type="radio" name="gender" value="male" checked={this.state.gender === "male"} onChange={e=>this.setState({gender:e.target.value})} required/> Male
-    <input type="radio" name="gender" value="female" checked={this.state.gender === "female"} onChange={e=>this.setState({gender:e.target.value})} required/> Female
-    <input type="radio" name="gender" value="other" checked={this.state.gender === "other"} onChange={e=>this.setState({gender:e.target.value})}  required/> Other
-                        </div><br/>
-                        <input className="btn btn-light formbutReg" type="submit" value="Submit"/>
+                        <input type="radio" name="gender" value="female" checked={this.state.gender === "female"} onChange={e=>this.setState({gender:e.target.value})} required/> Female
+                        <input type="radio" name="gender" value="other" checked={this.state.gender === "other"} onChange={e=>this.setState({gender:e.target.value})}  required/> Other
+                        </div>
+                        </label>
+                        <br/>
+                        <input className="btn btn-light formbutEdit" type="submit" value="Submit"/>
                     </form>
                 </div>
             </body>
