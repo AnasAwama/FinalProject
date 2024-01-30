@@ -91,7 +91,7 @@ class Regist extends React.Component{
             <body className="imageReg">
             <nav class="navbar navbar-expand-lg ">
                 <div class="container-fluid ">
-                <Link to="/" class="navbar-brand " >Weather App</Link>
+                <Link to="/"  style={{fontSize:"xx-Large"}} class="fontFamily navbar-brand " >Weather App</Link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -113,32 +113,37 @@ class Regist extends React.Component{
                         </div><br/>
                         <div class="formInputGroup">
                             <input className="formInput" type={this.state.showPassword ? "text" : "password"} name="password" onChange={e=>this.setState({password:e.target.value})} placeholder="Create Password" required/>
-                            <FontAwesomeIcon className="EyeMargin" icon={this.state.showPassword ? faEye : faEyeSlash} onClick={this.togglePasswordVisibility} />
+                            <div className="EyeMarginRight">
+                            <FontAwesomeIcon icon={this.state.showPassword ? faEye : faEyeSlash} onClick={this.togglePasswordVisibility} />
+                            </div>
                             <input className="formInput" type={this.state.showConfPassword ? "text" : "password"} name="confirmPassword" placeholder="Confirm Password" required/>
-                            <div className="EyeMargin">
+                            <div className="EyeMarginLeft">
                                 <FontAwesomeIcon icon={this.state.showConfPassword ? faEye : faEyeSlash} onClick={this.toggleConfPasswordVisibility} />
                             </div>
                         </div><br/>
-                        <label>Age: </label>
+                        <div className="formRangeContainer">
+                        <label className="LabelAge">Age: </label>
                         <input
                                 type="range"
-                                className="formInput"
+                                className="fromRangeInput formInput "
                                 min="0"
                                 max="100"
                                 value={this.state.age}
                                 name="age"
                                 onChange={this.handleAgeChange}
                             />
-                            <output>{this.state.age}</output><br/><br/>
-                        <label>Gender:</label>
+                            <output className="outputAge">{this.state.age}</output><br/><br/>
+                        </div>
+                        <label className="labelGender"><span>Gender:</span>
                         <div className="formRadioGroup">
                             <input type="radio" name="gender" onChange={e=>this.setState({gender:e.target.value})} value="male" required/> Male
                             <input type="radio" name="gender" onChange={e=>this.setState({gender:e.target.value})} value="female" required/> Female
                             <input type="radio" name="gender" onChange={e=>this.setState({gender:e.target.value})} value="other" required/> Other
-                        </div><br/>
-                        {/* <Link to="/" className="btn btn-light formbutReg">Submit</Link> */}
-                        <input className="btn btn-light formbutReg" type="submit" value="Sign Up"/>
-                        <div className="FontSize">Already have an account? <Link className="FontColor" to="/Login">LogIn Here</Link></div>
+                        </div>
+                        </label>
+                        <br/>
+                        <input className="btn btn-light formbutReg" type="submit" value="Sign-Up"/>
+                        <div className="FontSizeReg">Already have an account? <Link className="FontColor" to="/Login">LogIn Here</Link></div>
                     </form>
                 </div>
             </body>
