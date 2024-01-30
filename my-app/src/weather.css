@@ -11,6 +11,11 @@
     padding-top: 30px;
 }
 
+.fontFamily{
+    font-family:"poor story";
+    font-weight: 580;
+}
+
 .text-margin{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -58,6 +63,9 @@ img{
 }
 .Sright{
 margin-right: 25px;
+font-family:"poor story";
+    font-size: large;
+    font-weight: 500;
 }
 
 .Lright{
@@ -87,6 +95,12 @@ input{
 ::placeholder{
     color:rgba(0, 0, 0, 0.608);
     padding-left: 3px;
+    font-family:"poor story";
+    font-size: large;
+}
+.BoxFont{
+    font-family:"poor story";
+    font-weight: 500;
 }
 
 .imageSize{
